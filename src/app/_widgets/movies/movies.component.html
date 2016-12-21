@@ -1,0 +1,61 @@
+<p class="pull-right visible-xs">
+</p>
+<div class="jumbotron">
+  <p>Search</p>
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+        <input type="text" class="form-control " placeholder="Search for movies..." (ngModelChange)="autocompleteResult(searchStr)" [(ngModel)]="searchStr" name="searchStr" (keyup.enter)="searchMovies()" list="searchResults">
+        <!---<datalist id="searchResults"  *ngFor="let autocompete of reaserchAutocomplete">
+          <option value="{{autocompete.title}}" >
+        </datalist>-->
+        <datalist id="searchResults"   *ngFor="let autocompete of reaserchAutocomplete ">
+          <option value="{{autocompete.title}}">
+
+        </datalist>
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="button" (click)="searchMovies()" *ngIf="!searching" >Go!</button>
+          <img src="../../../public/images/searching.gif"*ngIf="searching">
+
+        </span>
+
+      </div>
+      <!-- /input-group -->
+    </div>
+
+  </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<div *ngIf="true">
+  <h3 class="orange-text">Search Results</h3>
+  <div class="row is-flex">
+    <div class="col-md-offset-1" *ngFor="let movie of movies" >
+      <app-card [movie]="movie"></app-card>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
