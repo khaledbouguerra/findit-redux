@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {MovieServiceService} from "../../_services/movie-service.service";
-
+import {select, NgRedux} from 'ng2-redux';
+import {Observable} from "rxjs";
+import {INITIAL_STATE} from "../../_interfaces/InitialState.interface";
+import {SearchState} from "../../_interfaces/SearchState.interface";
+import {state} from "../../_interfaces/state.interface";
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
@@ -11,9 +15,17 @@ export class MoviesComponent implements OnInit {
   movies:Array<Object>;
   searching:boolean=false;
   reaserchAutocomplete:any;
-  constructor(private movieServiceService:MovieServiceService) {}
+  RootReducer$:Observable<any>;
+  state:SearchState=INITIAL_STATE;
+  constructor(private movieServiceService:MovieServiceService,
+              private ngRedux: NgRedux<state>,
+               private action) {}
 
   ngOnInit() {
+
+
+      this.RootReducer$=this.ngRedux.select('RootReducer');
+    console.log(this.RootReducer$);
   }
   searchMovies(){
     this.searching=true;

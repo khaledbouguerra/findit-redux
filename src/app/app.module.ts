@@ -10,7 +10,8 @@ import {routes, FinditRoutingModule} from "./app-routing.module";
 import { MoviesComponent } from './_widgets/movies/movies.component';
 import {MovieServiceService} from "./_services/movie-service.service";
 import { MovieComponent } from './movie/movie.component';
-
+import { NgReduxModule, NgRedux } from 'ng2-redux';
+import {RootReducer} from './_reducres/root.reducer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,9 +24,14 @@ import { MovieComponent } from './movie/movie.component';
     FormsModule,
     HttpModule,
     FinditRoutingModule,
-    JsonpModule
+    JsonpModule,
+    NgReduxModule.forRoot()
   ],
   providers: [MovieServiceService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(ngRedux: NgRedux<any>) {
+    ngRedux.configureStore(RootReducer, {});
+  }
+}
